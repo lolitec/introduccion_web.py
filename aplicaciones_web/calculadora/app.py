@@ -14,7 +14,19 @@ class Index:
         formulario = web.input()
         n1 = int(formulario.inp_numero1)
         n2 = int(formulario.inp_numero2)
-        return render.calculadora(n1+n2)
+        if "btn_su" in formulario:
+            return render.calculadora(n1+n2)
+        elif "btn_re" in formulario:
+            return render.calculadora(n1-n2)
+        elif "btn_mu" in formulario:
+            return render.calculadora(n1*n2)
+        elif "btn_di" in formulario:
+            try:
+                return render.calculadora(round(float(n1)/float(n2),2))
+            except ZeroDivisionError:
+                return render.calculadora(0)
+        else:
+            return render.calculadora(0)
 
 if __name__ == "__main__":
     app.run()
